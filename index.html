@@ -349,26 +349,39 @@
            }
        }
 
-      // Theme synchronization for app side
+      // Theme synchronization for Gurapp side
       document.addEventListener('DOMContentLoaded', () => {
           // Initial theme application based on localStorage
           const storedTheme = localStorage.getItem('theme') || 'dark';
           document.body.classList.toggle('light-theme', storedTheme === 'light');
           
+          // Initial animation preference application
+          const animationsEnabled = localStorage.getItem('animationsEnabled') !== 'false';
+          document.body.classList.toggle('reduce-animations', !animationsEnabled);
+          
           // Set up listener for theme change messages
           window.addEventListener('message', (event) => {
               // Verify message origin and type for security
-              if (event.origin === window.location.origin && event.data.type === 'themeUpdate') {
-                  const newTheme = event.data.theme;
-                  document.body.classList.toggle('light-theme', newTheme === 'light');
-                  console.log('App theme updated via message to:', newTheme);
+              if (event.origin === window.location.origin) {
+                  if (event.data.type === 'themeUpdate') {
+                      const newTheme = event.data.theme;
+                      document.body.classList.toggle('light-theme', newTheme === 'light');
+                      console.log('App theme updated via message to:', newTheme);
+                  } else if (event.data.type === 'animationsUpdate') {
+                      const enableAnimations = event.data.enabled;
+                      document.body.classList.toggle('reduce-animations', !enableAnimations);
+                      console.log('App animations updated via message to:', enableAnimations ? 'enabled' : 'disabled');
+                  }
               }
           });
           
-          // Optional: Set up polling fallback to ensure themes stay in sync
+          // Optional: Set up polling fallback to ensure settings stay in sync
           setInterval(() => {
               const currentTheme = localStorage.getItem('theme') || 'dark';
               document.body.classList.toggle('light-theme', currentTheme === 'light');
+              
+              const currentAnimState = localStorage.getItem('animationsEnabled') !== 'false';
+              document.body.classList.toggle('reduce-animations', !currentAnimState);
           }, 5000);
       });
    </script>
