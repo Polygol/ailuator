@@ -391,15 +391,6 @@
                   }
               }
           });
-          
-          // Optional: Set up polling fallback to ensure settings stay in sync
-          setInterval(() => {
-              const currentTheme = localStorage.getItem('theme') || 'dark';
-              document.body.classList.toggle('light-theme', currentTheme === 'light');
-              
-              const currentAnimState = localStorage.getItem('animationsEnabled') !== 'false';
-              document.body.classList.toggle('reduce-animations', !currentAnimState);
-          }, 5000);
       });
    </script>
 </body>
