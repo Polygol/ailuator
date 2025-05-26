@@ -76,6 +76,19 @@
           transition: background-color 0.3s, color 0.3s;
           color: var(--text-color);
       }
+
+      body::-webkit-scrollbar, .modal-content::-webkit-scrollbar {
+            width: 8px; /* Thin scrollbar */
+        }
+
+        body::-webkit-scrollbar-track, .modal-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        body::-webkit-scrollbar-thumb, .modal-content::-webkit-scrollbar-thumb {
+            background-color: var(--transparent-color);
+            border-radius: 50px;
+        }
       
       .calculator {
           width: 100%;
