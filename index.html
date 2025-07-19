@@ -112,7 +112,7 @@
           margin-bottom: 20px;
           cursor: pointer;
           display: none;
-          backdrop-filter: blur(5px) var(--edge-refraction-filter);
+          backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
           border: 1px solid var(--glass-border);
       }
       
@@ -143,7 +143,7 @@
           background-color: var(--search-background);
           color: var(--text-color);
           transition: background-color 0.2s;
-          backdrop-filter: blur(5px) var(--edge-refraction-filter);
+          backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
           transform: scale(1);
           transition: all 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
          border: 1px solid var(--glass-border);
