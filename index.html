@@ -12,6 +12,7 @@
    <style>
         :root {
             --edge-refraction-filter: url('#edge-refraction-only');
+           --sun-shadow: 0 0 0 0 transparent;
            
             /* Dark Theme (Default) Variables */
             --background-color-dark: #1c1c1c;
@@ -117,6 +118,7 @@
           cursor: pointer;
           display: none;
           backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+         box-shadow: var(--sun-shadow);
           border: 1px solid var(--glass-border);
       }
       
@@ -148,6 +150,7 @@
           color: var(--text-color);
           transition: background-color 0.2s;
           backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+         box-shadow: var(--sun-shadow);
           transform: scale(1);
           transition: all 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
          border: 1px solid var(--glass-border);
