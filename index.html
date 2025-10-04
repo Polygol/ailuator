@@ -116,7 +116,7 @@
           margin-bottom: 20px;
           cursor: pointer;
           display: none;
-          backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+          backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
          box-shadow: var(--sun-shadow);
           border: 1px solid var(--glass-border);
       }
@@ -148,7 +148,7 @@
           background-color: var(--search-background);
           color: var(--text-color);
           transition: background-color 0.2s;
-          backdrop-filter: blur(5px) saturate(2) var(--edge-refraction-filter);
+          backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
          box-shadow: var(--sun-shadow);
           transform: scale(1);
           transition: all 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
@@ -273,10 +273,10 @@
         
             <!-- Part 5: Apply the displacement twice and combine the results. -->
             <!-- Pass 1: A positive scale refracts the top and left edges inward correctly. -->
-            <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="30" xChannelSelector="R" yChannelSelector="G" result="disp_positive"></feDisplacementMap>
+            <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="15" xChannelSelector="R" yChannelSelector="G" result="disp_positive"></feDisplacementMap>
             
             <!-- Pass 2: A negative scale refracts the bottom and right edges inward correctly. -->
-            <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="-30" xChannelSelector="R" yChannelSelector="G" result="disp_negative"></feDisplacementMap>
+            <feDisplacementMap in="SourceGraphic" in2="displacement_map" scale="-15" xChannelSelector="R" yChannelSelector="G" result="disp_negative"></feDisplacementMap>
             
             <!-- Part 6: Blend the two results. The 'lighten' mode takes the non-transparent pixels
                  from both passes. Since the "incorrect" refractions are pushed into transparent
