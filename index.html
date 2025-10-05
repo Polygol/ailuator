@@ -122,34 +122,37 @@
       }
       
       .numpad {
-          display: none;
+          display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 10px;
-          height: 60%;
+          height: 70%;
           width: 100%;
       }
       
       .control {
-          background-color: var(--text-color);
+          background-color: var(--secondary-text-color);
           color: var(--background-color);
           grid-column: span 2;
+          border-radius: 50px;
+          corner-shape: superellipse(1.5);
       }
       
-      .numpad.visible {
-          display: grid;
+      .numpad.hidden {
+          display: none;
       }
       
       button {
           padding: 15px;
           font-size: 1.2rem;
           border: none;
-          border-radius: 25px;
           cursor: pointer;
           background-color: var(--search-background);
           color: var(--text-color);
           transition: background-color 0.2s;
           backdrop-filter: var(--edge-refraction-filter) saturate(2) blur(2.5px);
-         box-shadow: var(--sun-shadow);
+          border-radius: 50px;
+          corner-shape: superellipse(1.5);
+          box-shadow: var(--sun-shadow);
           transform: scale(1);
           transition: all 0.15s cubic-bezier(0.2, 0, 0.38, 0.9);
          border: 1px solid var(--glass-border);
@@ -162,8 +165,10 @@
       }
       
       .operation {
-          background-color: var(--text-color);
+          background-color: var(--secondary-text-color);
           color: var(--background-color);
+          border-radius: 50px;
+          corner-shape: superellipse(1.5);
       }
       
       .display-container {
@@ -291,9 +296,7 @@
            <input type="text" id="preview" readonly>
            <input type="text" id="display" readonly>
        </div>
-<button id="toggle-numpad">
-    <span class="material-symbols-rounded">dialpad</span>
-</button>       <div class="numpad">
+      <div class="numpad">
            <button class="control">AC</button>
            <button class="control">⌫</button>
            <button>7</button>
@@ -319,32 +322,8 @@
        const equationView = document.getElementById('equation-view');
        const preview = document.getElementById('preview');
        const display = document.getElementById('display');
-       const toggleButton = document.getElementById('toggle-numpad');
        const numpad = document.querySelector('.numpad');
        let expression = '';
-
-       function isTouchDevice() {
-           return (('ontouchstart' in window) ||
-               (navigator.maxTouchPoints > 0) ||
-               (navigator.msMaxTouchPoints > 0));
-       }
-
-       function hasKeyboard() {
-           return window.matchMedia('(pointer: fine)').matches && !isTouchDevice();
-       }
-
-       function setupInterface() {
-           if (!hasKeyboard()) {
-               numpad.classList.add('visible');
-               toggleButton.style.display = 'none';
-           } else {
-               toggleButton.style.display = 'block';
-           }
-       }
-
-       setupInterface();
-
-       window.matchMedia('(pointer: fine)').addListener(setupInterface);
 
        function calculatePreview(expr) {
            try {
@@ -355,10 +334,6 @@
                return '';
            }
        }
-
-       toggleButton.addEventListener('click', () => {
-           numpad.classList.toggle('visible');
-       });
 
        document.addEventListener('keydown', (e) => {
            const key = e.key;
