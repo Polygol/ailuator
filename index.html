@@ -158,12 +158,6 @@
          border: 1px solid var(--glass-border);
       }
       
-      button:active {
-          transform: scale(0.96);
-          transition: all 0.1s cubic-bezier(0.2, 0, 0.38, 0.9);
-          filter: brightness(1.5);
-      }
-      
       .operation {
           background-color: var(--accent);
           color: var(--background-color);
@@ -224,33 +218,6 @@
          .calculator {
             padding: 20px;
          }
-      }
-      
-      /* When animations are disabled */
-      .reduce-animations * {
-          /* Disable all animations */
-          animation: none !important;
-      
-          /* Disable all transitions except opacity */
-          transition: opacity 0.3s ease !important;
-          transition-property: opacity !important;
-      }
-      
-      /* Special handling for clickable elements */
-      .reduce-animations button,
-      .reduce-animations #toggle-numpad {
-          /* Keep initial state but remove transition */
-          transform: scale(1) !important;
-          transition: opacity 0.3s ease !important;
-      }
-      
-      /* Keep active state functional but without animation */
-      .reduce-animations button:active,
-      .reduce-animations #toggle-numpad:active {
-          /* Apply scale instantly without transition */
-          transform: scale(0.98) !important;
-          transition: none !important;
-          filter: brightness(1.5) !important;
       }
    </style>
 </head>
