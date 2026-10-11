@@ -8,16 +8,6 @@ const LANG_JP_AILUATOR = {
     ERROR: "エラー"
 };
 
-const LANG_DE_AILUATOR = {
-    TITLE: "Ailuator",
-    ERROR: "Fehler"
-};
-
-const LANG_ES_AILUATOR = {
-    TITLE: "Ailuator",
-    ERROR: "Error"
-};
-
 const LANG_KO_AILUATOR = {
     TITLE: "계산기",
     ERROR: "오류"

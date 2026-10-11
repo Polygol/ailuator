@@ -3,11 +3,66 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-   <title>Ailuator</title>
+   <title data-lang-key="TITLE">Ailuator</title>
    <link rel="icon" href="favicon.png" type="image/png">
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,700,1,0" />
-   <script src="https://cdn.jsdelivr.net/gh/Polygol/polygol.github.io@main/assets/gurapp/api/gurasuraisu-api.js" defer></script>
+   <script src="lang.js">
+        // --- Internationalization (i18n) Support ---
+        function getAppLanguage() {
+            let l = (localStorage.getItem('language') || localStorage.getItem('selectedLanguage') || 'EN').toUpperCase();
+            if (l === 'JA') l = 'JP';
+            return ['EN', 'JP', 'KO', 'ZH'].includes(l) ? l : 'EN';
+        }
+
+        function t(key, params = {}) {
+            const lang = getAppLanguage();
+            const dict = window['LANG_' + lang + '_AILUATOR'] || window['LANG_EN_AILUATOR'] || {};
+            let str = dict[key] || key;
+            Object.keys(params).forEach(p => {
+                str = str.replace(new RegExp('\\{' + p + '\\}', 'g'), params[p]);
+            });
+            return str;
+        }
+
+        function applyLanguage(langCode) {
+            if (langCode) localStorage.setItem('language', langCode);
+            const lang = getAppLanguage();
+            const bcpMap = { EN: 'en-US', JP: 'ja-JP', KO: 'ko-KR', ZH: 'zh-CN' };
+            document.documentElement.lang = bcpMap[lang] || 'en-US';
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const k = el.getAttribute('data-lang-key');
+                if (k) {
+                    if (el.tagName === 'TITLE') {
+                        document.title = t(k);
+                    } else {
+                        el.textContent = t(k);
+                    }
+                }
+            });
+            document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+                const k = el.getAttribute('data-lang-placeholder');
+                if (k) el.placeholder = t(k);
+            });
+            document.querySelectorAll('[data-lang-title]').forEach(el => {
+                const k = el.getAttribute('data-lang-title');
+                if (k) el.title = t(k);
+            });
+            if (typeof onLanguageChanged === 'function') {
+                onLanguageChanged(lang);
+            }
+        }
+
+        window.addEventListener('message', (e) => {
+            if (e.data && (e.data.type === 'languageUpdate' || e.data.type === 'localeUpdate')) {
+                applyLanguage(e.data.languageCode);
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => applyLanguage());
+
+   </script>
+   <script src="https://cdn.jsdelivr.net/gh/Polygol/polygol.github.io@main/assets/polygolapp/api/polygol-api.js" defer></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
    <style>
         * {
@@ -227,7 +282,7 @@
                        preview.value = '';
                        expression = result.toString();
                    } catch {
-                       display.value = 'Error';
+                       display.value = t('ERROR');
                        preview.value = '';
                        equationView.value = '';
                        expression = '';
