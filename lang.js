@@ -1,19 +1,25 @@
-const LANG_EN_AILUATOR = {
+// Polygol Ailuator Language Dictionary
+window.LANG_EN_AILUATOR = {
     TITLE: "Ailuator",
     ERROR: "Error"
 };
 
-const LANG_JP_AILUATOR = {
+window.LANG_JP_AILUATOR = {
     TITLE: "計算機",
     ERROR: "エラー"
 };
 
-const LANG_KO_AILUATOR = {
+window.LANG_KO_AILUATOR = {
     TITLE: "계산기",
     ERROR: "오류"
 };
 
-const LANG_ZH_AILUATOR = {
+window.LANG_ZH_AILUATOR = {
     TITLE: "计算器",
     ERROR: "错误"
 };
+
+var LANG_EN_AILUATOR = window.LANG_EN_AILUATOR;
+var LANG_JP_AILUATOR = window.LANG_JP_AILUATOR;
+var LANG_KO_AILUATOR = window.LANG_KO_AILUATOR;
+var LANG_ZH_AILUATOR = window.LANG_ZH_AILUATOR;
